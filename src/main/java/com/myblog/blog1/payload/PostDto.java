@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data // Previous Annotation used before was @getter & @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostDto {
