@@ -25,11 +25,11 @@ import java.util.Set;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final ModelMapper modelMapper;
-    private final UserRepository userRepository;
+    private  AuthenticationManager  authenticationManager;
+    private  RoleRepository roleRepository;
+    private  PasswordEncoder passwordEncoder;
+    private  ModelMapper modelMapper;
+    private  UserRepository userRepository;
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager,
@@ -37,7 +37,6 @@ public class AuthController {
                           PasswordEncoder passwordEncoder,
                           ModelMapper modelMapper,
                           UserRepository userRepository) {
-        this.authenticationManager = authenticationManager;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;

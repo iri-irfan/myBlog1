@@ -12,7 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.print.attribute.standard.MediaSize;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,7 +87,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostById(long id) {
-        postRepository.deleteById(id);
+        Optional<Post> findById = postRepository.findById(id);
+        if (findById.isPresent()){
+            postRepository.deleteById(id);
+        }
+        else{
+            throw new ResourceNotFoundException("Post not found with id:"+id);
+        }
     }
 
     PostDto mapToDto(Post post){

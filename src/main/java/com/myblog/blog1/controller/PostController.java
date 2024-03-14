@@ -1,19 +1,26 @@
 package com.myblog.blog1.controller;
 
+import com.myblog.blog1.entity.Post;
 import com.myblog.blog1.payload.PostDto;
+import com.myblog.blog1.repository.PostRepository;
 import com.myblog.blog1.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
-
-
+    
+    @Autowired
+    private PostRepository postRepository;   
+    
+    @Autowired
     private PostService postService;
 
     public PostController(PostService postService) {
@@ -62,7 +69,8 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePostById(@PathVariable long id){
-        postService.deletePostById(id);
+             postService.deletePostById(id);
+
         return new ResponseEntity<>("Post is Deleted!!!", HttpStatus.OK);
 
     }

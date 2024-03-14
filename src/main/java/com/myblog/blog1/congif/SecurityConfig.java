@@ -20,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
@@ -28,6 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
 
     @Override
@@ -39,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/api/posts/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/api/posts/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
